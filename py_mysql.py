@@ -10,7 +10,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 
 def get_conn_mysql():
-        conn = MySQLdb.connect(host='10.148.3.140', port=3306, user='spms', passwd='spms', db='spms_service', charset='utf8')
+        conn = MySQLdb.connect(host='xx.xx.xx', port=3306, user='username', passwd='userpd', db='db-name', charset='utf8')
         return conn
 def query_data(cur, sql, args):
         cur.execute(sql, args)
@@ -50,8 +50,9 @@ def send_mail(to,host,file_path):
     with open(file_path, 'rb') as f:
         txt = MIMEText(f.read(), 'plain', 'gbk')
         txt['Content-Type'] = 'application/octet-stream'
-        txt['Content-Disposition'] = 'attachment;filename="TestCase.xls"'
+        txt['Content-Disposition'] = "attachment;filename=%s" %(file_path)
     email = MIMEMultipart()
+    email.attach(MIMEText(content, 'plain', 'utf-8'))
     email.attach(txt)
     email['Subject'] = subject
     email['From'] = sender

@@ -64,13 +64,13 @@ def send_mail(to,host,file_path):
             smtpObj.sendmail(sender, to, msg)
             smtpObj.quit()
             os.remove(file_path)
-            print('邮件发送成功' + file_path + '已删除')
+            print('邮件发送成功\n%s已删除' %(file_path))
 
-        except smtpObj.SMTPException:
+        except 
             print('Error:邮件发送失败！！！')
 
     else:
-        print("发送文件不存在")
+        print("发送文件不存在！！！")
         print('Error:邮件发送失败！！！')
 
 if __name__ == '__main__':
@@ -80,6 +80,6 @@ if __name__ == '__main__':
     """
     file_path = sys.argv[1]
     read_mysql_to_excel(file_path, sql)
-    to = ['yefuxiong@vip.qq.com']
+    to = ['%s'%(sys.argv[2]),'yefuxiong@vip.qq.com']
     host = 'smtp.139.com'
     send_mail(to,host,file_path)

@@ -1,7 +1,6 @@
 # coding:utf8
-import sys
+import sys,os
 import xlwt
-#import MySQLdb
 import pymysql as MySQLdb
 import datetime
 import smtplib
@@ -16,13 +15,12 @@ def query_data(cur, sql, args):
         cur.execute(sql, args)
         return cur.fetchall()
 
-# out_path 保存的路径， sql： 需要执行的语句
 def read_mysql_to_excel(file_path, sql):
     conn = get_conn_mysql()
     cursor = conn.cursor()
     count = cursor.execute(sql)
     if count != 0:
-        #        print(count)
+        print('查询结果：%s' %(count))
         cursor.scroll(0, mode='absolute')
         results = cursor.fetchall()
         fields = cursor.description
@@ -42,34 +40,46 @@ def read_mysql_to_excel(file_path, sql):
                     sheet.write(row, col, u'%s'%val)
         workbook.save(file_path)
 def send_mail(to,host,file_path):
-    sender = 'yefuxiong@139.com'
-    user = 'yefuxiong@139.com'
-    password = 'yfx960216'
-    subject = '导出数据'
-    content = '您所需要的数据导出，请见附件。'
-    with open(file_path, 'rb') as f:
-        txt = MIMEText(f.read(), 'plain', 'gbk')
-        txt['Content-Type'] = 'application/octet-stream'
-        txt['Content-Disposition'] = "attachment;filename=%s" %(file_path)
-    email = MIMEMultipart()
-    email.attach(MIMEText(content, 'plain', 'utf-8'))
-    email.attach(txt)
-    email['Subject'] = subject
-    email['From'] = sender
-    email['To'] = ",".join(to)
-    msg = email.as_string()
-#    print('Logging with server...')
-    smtpObj = smtplib.SMTP_SSL(host,465)
-    smtpObj.ehlo()
-    smtpObj.login(user, password)
-#    print('Login successful.')
-    smtpObj.sendmail(sender, to, msg)
-    smtpObj.quit()
-    print('Email has been sent')
+    if os.path.isfile(file_path):
+        sender = 'yefuxiong@139.com'
+        user = 'yefuxiong@139.com'
+        password = 'xxxxxxxxx'
+        subject = '导出数据'
+        content = '您所需要的数据导出，请见附件。'
+        with open(file_path, 'rb') as f:
+            txt = MIMEText(f.read(), 'plain', 'gbk')
+            txt['Content-Type'] = 'application/octet-stream'
+            txt['Content-Disposition'] = "attachment;filename=%s" % (file_path)
+        email = MIMEMultipart()
+        email.attach(MIMEText(content, 'plain', 'utf-8'))
+        email.attach(txt)
+        email['Subject'] = subject
+        email['From'] = sender
+        email['To'] = ",".join(to)
+        msg = email.as_string()
+        smtpObj = smtplib.SMTP_SSL(host, 465)
+        try:
+            smtpObj.ehlo()
+            smtpObj.login(user, password)
+            smtpObj.sendmail(sender, to, msg)
+            smtpObj.quit()
+            os.remove(file_path)
+            print('邮件发送成功' + file_path + '已删除')
+
+        except smtpObj.SMTPException:
+            print('Error:邮件发送失败！！！')
+
+    else:
+        print("发送文件不存在")
+        print('Error:邮件发送失败！！！')
+
 if __name__ == '__main__':
-    sql = "SELECT * from user"
-    file_path = './TestCase.xls'
+    sql = 
+    """
+    这里是sql语句
+    """
+    file_path = sys.argv[1]
     read_mysql_to_excel(file_path, sql)
-    to = ['yefuxiong@vip.qq.com','yefuxiong@live.com']
+    to = ['yefuxiong@vip.qq.com']
     host = 'smtp.139.com'
     send_mail(to,host,file_path)

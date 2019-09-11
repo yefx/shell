@@ -1,4 +1,4 @@
-package com.lovnx;
+package com.devops;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

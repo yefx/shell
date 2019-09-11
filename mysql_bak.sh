@@ -1,6 +1,6 @@
 #!/bin/bash
 
-databases=(spms_service)
+databases=(dev test prep)
 
 basepath='/opt/backup/mysql/'
 
@@ -10,8 +10,7 @@ fi
 
 for db in ${databases[*]}
   do
-    # mysqldump -uspms -pspms --databases $db > $basepath$db-$(date +%Y%m%d).sql
-      mysqldump -uspms -pspms --databases $db > $basepath$db-$(date +%Y%m%d).sql
+     mysqldump -uuser -ppasswd --databases $db > $basepath$db-$(date +%Y%m%d).sql
 
     #tar zPcf $basepath$db-$(date +%Y%m%d).sql.tar.gz $basepath$db-$(date +%Y%m%d_%H:%M).sql
 

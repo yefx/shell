@@ -5,12 +5,12 @@ import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 
-import com.lovnx.filter.AccessFilter;
-import com.lovnx.filter.ErrorFilter;
-import com.lovnx.filter.RateLimitFilter;
-import com.lovnx.filter.ResultFilter;
-import com.lovnx.filter.UuidFilter;
-import com.lovnx.filter.ValidateFilter;
+import com.devops.filter.AccessFilter;
+import com.devops.filter.ErrorFilter;
+import com.devops.filter.RateLimitFilter;
+import com.devops.filter.ResultFilter;
+import com.devops.filter.UuidFilter;
+import com.devops.filter.ValidateFilter;
 
 @EnableZuulProxy
 @SpringCloudApplication

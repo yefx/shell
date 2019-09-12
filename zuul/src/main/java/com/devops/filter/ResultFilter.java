@@ -1,4 +1,4 @@
-package com.lovnx.filter;
+package com.devops.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

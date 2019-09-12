@@ -1,4 +1,4 @@
-package com.lovnx;
+package com.devops;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +13,7 @@ import de.codecentric.boot.admin.notify.RemindingNotifier;
 /**
  * 
  * @Title: 为监控的服务添加邮件通知
- * @Package com.lovnx 
+ * @Package com.devops 
  * @author yezhiyuan   
  * @date 2017年6月14日 上午10:18:13 
  * @version V1.0

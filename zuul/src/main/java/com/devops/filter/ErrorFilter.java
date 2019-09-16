@@ -2,17 +2,10 @@ package com.devops.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-
-import io.reactivex.netty.protocol.http.server.HttpServerResponse;
-
-import org.bouncycastle.jcajce.provider.digest.MD5;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 
 public class ErrorFilter extends ZuulFilter  {
 

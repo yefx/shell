@@ -1,4 +1,4 @@
-FROM localhost:32000/jdk8:alpine
+FROM img.yefxx.cn:5443/ops/jdk8:alpine
 MAINTAINER baxk"yefuxiong@live.com"
 WORKDIR workspace
 COPY jar /data/webapps/

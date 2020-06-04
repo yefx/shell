@@ -1,6 +1,6 @@
 #!/bin/bash
 
-databases=(dev test prep)
+databases=(mysql test test1)
 
 basepath='/opt/backup/mysql/'
 
@@ -11,11 +11,8 @@ fi
 for db in ${databases[*]}
   do
      mysqldump -uuser -ppasswd --databases $db > $basepath$db-$(date +%Y%m%d).sql
-
     #tar zPcf $basepath$db-$(date +%Y%m%d).sql.tar.gz $basepath$db-$(date +%Y%m%d_%H:%M).sql
-
     find $basepath -mtime +32 -name "*.sql" -exec rm -rf {} \;
   done
 
-  #rm -rf $basepath/*.sql
 
